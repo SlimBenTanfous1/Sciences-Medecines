@@ -1,29 +1,178 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html
+        lang="en"
+        class="light-style customizer-hide"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="{{ asset('assets/') }}"
+        data-template="vertical-menu-template-free"
+>
+<head>
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
 
-{% block title %}Sign Up{% endblock %}
+    <title>Register Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
-{% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <meta name="description" content="" />
 
-    <h1>Sign Up</h1>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon/favicon.ico') }}" />
 
-    {{ form_errors(signUpForm) }}
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+    />
 
-    {{ form_start(signUpForm) }}
-    {{ form_row(signUpForm.email) }}
-    {{ form_row(signUpForm.plainPassword, {
-        label: 'Password'
-    }) }}
-    {{ form_row(signUpForm.nom) }}
-    {{ form_row(signUpForm.prenom) }}
-    {{ form_row(signUpForm.pdp) }}
-    {{ form_row(signUpForm.num_tel) }}
-    {{ form_row(signUpForm.adresse) }}
-    {{ form_row(signUpForm.agreeTerms) }}
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ asset('vendor/css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('css/demo.css') }}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ asset('vendor/css/pages/page-auth.css') }}" />
+    <!-- Helpers -->
+    <script src="{{ asset('vendor/js/helpers.js') }}"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="{{ asset('js/config.js') }}"></script>
+</head>
+
+<body>
+<!-- Content -->
+
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <!-- Register Card -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="app-brand justify-content-center">
+                        <a href="index.html" class="app-brand-link gap-2">
+                  <span class="app-brand-logo demo">
+                    <!-- SVG Logo -->
+                  </span>
+                            <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                        </a>
+                    </div>
+                    <!-- /Logo -->
+                    <h4 class="mb-2">Inscription:</h4>
+                    <p class="mb-4">Veuillez procéder a remplire le formulaire</p>
+
+                    <!--<div class="mb-3">
+                {{ form_start(signUpForm,{'attr':{'novalidate':'novalidate', 'class': 'text-black-50','class': 'text-danger'}})}}
+
+                    </div>-->
+                    <form id="formAuthentication" class="mb-3" enctype="multipart/form-data" method="post">
+                    <div class="mb-3">
+                        {{ form_label(signUpForm.nom, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(signUpForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre nom'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(signUpForm.prenom, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(signUpForm.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Entre votre prénom'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(signUpForm.email, 'E-mail', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(signUpForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre e-mail'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(signUpForm.num_tel, 'Numéro de Télèphone', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(signUpForm.num_tel, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre Numéro de Télèphone'}}) }}
+                    </div>
+                    <div class="mb-3 form-password-toggle">
+                        {{ form_label(signUpForm.plainPassword, 'Mot de Passe', {'label_attr': {'class': 'form-label'}}) }}
+                        <div class="input-group input-group-merge">
+                            {{ form_widget(signUpForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': '••••••••••••••'}}) }}
+                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                            {{ form_label(signUpForm.adresse, 'Adresse', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(signUpForm.adresse, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre adresse'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(signUpForm.pdp, 'Select an image to upload', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(signUpForm.pdp, {'attr': {'class': 'form-control', 'onchange': 'previewImage(event)'}}) }}
+                        <small class="form-text text-muted">Max file size: 20 MB</small>
+                        <div class="mt-3">
+                            <img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width: 100%; height: auto;" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            {{ form_widget(signUpForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                            {{ form_label(signUpForm.agreeTerms, 'I agree to privacy policy & terms', {'label_attr': {'class': 'form-check-label'}}) }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary d-grid w-100">Sign up</button>
+                        {{ form_end(signUpForm) }}
+
+                    </form>
+                    <p class="text-center">
+                        <span>Already have an account?</span>
+                        <a href="auth-login-basic.html">
+                            <span>Sign in instead</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <!-- Register Card -->
+        </div>
+    </div>
+</div>
 
 
-    <button type="submit" class="btn">Sign Up</button>
-    {{ form_end(signUpForm) }}
-{% endblock %}
+<!-- / Content -->
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="{{ asset('vendor/libs/jquery/jquery.js') }}"></script>
+<script src="{{ asset('vendor/libs/popper/popper.js') }}"></script>
+<script src="{{ asset('vendor/js/bootstrap.js') }}"></script>
+<script src="{{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+
+<script src="{{ asset('vendor/js/menu.js') }}"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+
+<!-- Main JS -->
+<script src="{{ asset('js/main.js') }}"></script>
+
+<!-- Page JS -->
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script>
+    function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function() {
+            var dataURL = reader.result;
+            var output = document.getElementById('imagePreview');
+            output.src = dataURL;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
+</body>
+</html>
+
+
